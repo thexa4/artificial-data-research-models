@@ -14,9 +14,9 @@
 # ==============================================================================
 """Validate mobilenet_v1 with options for quantization."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import math
 import tensorflow as tf
@@ -95,10 +95,10 @@ def metrics(logits, labels):
       'Accuracy': tf.metrics.accuracy(tf.argmax(logits, 1), labels),
       'Recall_5': tf.metrics.recall_at_k(labels, logits, 5),
   })
-  for name, value in names_to_values.iteritems():
+  for name, value in names_to_values.items():
     slim.summaries.add_scalar_summary(
         value, name, prefix='eval', print_summary=True)
-  return names_to_updates.values()
+  return list(names_to_updates.values())
 
 
 def build_model():

@@ -30,9 +30,9 @@ $ python download_and_convert_data.py \
     --dataset_dir=/tmp/flowers
 ```
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import tensorflow as tf
 

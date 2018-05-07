@@ -197,5 +197,5 @@ def create_hparams(hparam_string=None):
     tf.logging.info('Parsing command line hparams: %s', hparam_string)
     hparams.parse(hparam_string)
 
-  tf.logging.info('Final parsed hparams: %s', hparams.values())
+  tf.logging.info('Final parsed hparams: %s', list(hparams.values()))
   return hparams

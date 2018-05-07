@@ -13,9 +13,9 @@
 # limitations under the License.
 # ==============================================================================
 """Tests for slim.pnasnet."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import tensorflow as tf
 
@@ -85,7 +85,7 @@ class PNASNetTest(tf.test.TestCase):
                         'Logits': [batch_size, 1000],
                        }
     self.assertEqual(len(end_points), 17)
-    self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
+    self.assertItemsEqual(list(endpoints_shapes.keys()), list(end_points.keys()))
     for endpoint_name in endpoints_shapes:
       tf.logging.info('Endpoint name: {}'.format(endpoint_name))
       expected_shape = endpoints_shapes[endpoint_name]

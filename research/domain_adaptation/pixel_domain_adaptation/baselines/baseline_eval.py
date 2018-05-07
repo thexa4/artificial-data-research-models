@@ -13,9 +13,9 @@
 # limitations under the License.
 
 r"""Evals the classification/pose baselines."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 from functools import partial
 
@@ -123,7 +123,7 @@ def main(unused_argv):
     tf.summary.histogram('outputs/Predictions', predictions)
     tf.summary.histogram('outputs/Ground_Truth', class_labels)
 
-    for name, value in metrics_to_values.iteritems():
+    for name, value in metrics_to_values.items():
       tf.summary.scalar(name, value)
 
     num_batches = int(math.ceil(num_samples / float(FLAGS.batch_size)))
@@ -133,7 +133,7 @@ def main(unused_argv):
         checkpoint_dir=FLAGS.checkpoint_dir,
         logdir=FLAGS.eval_dir,
         num_evals=num_batches,
-        eval_op=metrics_to_updates.values(),
+        eval_op=list(metrics_to_updates.values()),
         eval_interval_secs=FLAGS.eval_interval_secs)
 
 

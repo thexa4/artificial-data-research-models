@@ -202,7 +202,7 @@ def create_model(hparams,
                     private_scope='transferred_task_classifier',
                     reuse_shared=True)
   # Remove any endpoints with None values
-  return dict((k, v) for k, v in end_points.iteritems() if v is not None)
+  return dict((k, v) for k, v in end_points.items() if v is not None)
 
 
 def batch_norm_params(is_training, batch_norm_decay):
@@ -282,7 +282,7 @@ def project_latent_vars(hparams, proj_shape, latent_vars, combine_method='sum'):
       # Project & reshape noise to a HxWxC input
       projected = slim.fully_connected(
           latent_vars[var],
-          np.prod(proj_shape),
+          int(np.prod(proj_shape)),
           activation_fn=tf.nn.relu,
           normalizer_fn=slim.batch_norm)
       values.append(tf.reshape(projected, [hparams.batch_size] + proj_shape))

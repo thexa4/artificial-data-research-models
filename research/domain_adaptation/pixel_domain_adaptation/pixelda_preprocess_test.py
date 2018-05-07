@@ -14,9 +14,9 @@
 
 """Tests for domain_adaptation.pixel_domain_adaptation.pixelda_preprocess."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 # Dependency imports
 

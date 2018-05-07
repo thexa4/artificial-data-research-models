@@ -13,9 +13,9 @@
 # limitations under the License.
 # ==============================================================================
 """DCGAN generator and discriminator from https://arxiv.org/abs/1511.06434."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 from math import log
 
@@ -88,7 +88,7 @@ def discriminator(inputs,
                           kernel_size=4,
                           activation_fn=tf.nn.leaky_relu):
         net = inputs
-        for i in xrange(int(log(inp_shape, 2))):
+        for i in range(int(log(inp_shape, 2))):
           scope = 'conv%i' % (i + 1)
           current_depth = depth * 2**i
           normalizer_fn_ = None if i == 0 else normalizer_fn
@@ -170,7 +170,7 @@ def generator(inputs,
             net, current_depth, stride=1, padding='VALID', scope=scope)
         end_points[scope] = net
 
-        for i in xrange(2, num_layers):
+        for i in range(2, num_layers):
           scope = 'deconv%i' % (i)
           current_depth = depth * 2 ** (num_layers - i)
           net = slim.conv2d_transpose(net, current_depth, scope=scope)

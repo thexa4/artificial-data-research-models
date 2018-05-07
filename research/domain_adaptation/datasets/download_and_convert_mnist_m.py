@@ -22,9 +22,9 @@ protocol buffers, each of which contain a single image and label.
 The script should take about a minute to run.
 
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import os
 import random
@@ -120,7 +120,7 @@ def _convert_dataset(split_name, filenames, filename_to_class_id, dataset_dir):
         for filename in filenames:
           # Read the filename:
           image_data = tf.gfile.FastGFile(
-              os.path.join(png_directory, filename), 'r').read()
+              os.path.join(png_directory, filename), 'rb').read()
           height, width = image_reader.read_image_dims(sess, image_data)
 
           class_id = filename_to_class_id[filename]
@@ -222,7 +222,7 @@ def run(dataset_dir):
                    dataset_dir)
 
   # Finally, write the labels file:
-  labels_to_class_names = dict(zip(range(len(_CLASS_NAMES)), _CLASS_NAMES))
+  labels_to_class_names = dict(list(zip(list(range(len(_CLASS_NAMES))), _CLASS_NAMES)))
   dataset_utils.write_label_file(labels_to_class_names, dataset_dir)
 
   print('\nFinished converting the MNIST-M dataset!')

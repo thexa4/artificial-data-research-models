@@ -77,9 +77,9 @@ to stderr:
 > Wrote 615299 bounding boxes from 544546 annotated images.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import glob
 import os.path
@@ -129,7 +129,7 @@ def ProcessXMLAnnotation(xml_file):
   num_boxes = FindNumberBoundingBoxes(root)
   boxes = []
 
-  for index in xrange(num_boxes):
+  for index in range(num_boxes):
     box = BoundingBox()
     # Grab the 'index' annotation.
     box.xmin = GetInt('xmin', root, index)

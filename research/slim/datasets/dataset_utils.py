@@ -13,9 +13,9 @@
 # limitations under the License.
 # ==============================================================================
 """Contains utilities for downloading and converting datasets."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import os
 import sys
@@ -70,7 +70,7 @@ def float_feature(values):
 def image_to_tfexample(image_data, image_format, height, width, class_id):
   return tf.train.Example(features=tf.train.Features(feature={
       'image/encoded': bytes_feature(image_data),
-      'image/format': bytes_feature(image_format),
+      'image/format': bytes_feature(str.encode(image_format)),
       'image/class/label': int64_feature(class_id),
       'image/height': int64_feature(height),
       'image/width': int64_feature(width),
@@ -141,7 +141,7 @@ def read_label_file(dataset_dir, filename=LABELS_FILENAME):
   with tf.gfile.Open(labels_filename, 'rb') as f:
     lines = f.read().decode()
   lines = lines.split('\n')
-  lines = filter(None, lines)
+  lines = [_f for _f in lines if _f]
 
   labels_to_class_names = {}
   for line in lines:

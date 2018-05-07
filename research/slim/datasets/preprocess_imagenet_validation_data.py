@@ -44,9 +44,9 @@ Sample usage:
   imagenet_2012_validation_synset_labels.txt
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import os
 import sys
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     os.makedirs(labeled_data_dir)
 
   # Move all of the image to the appropriate sub-directory.
-  for i in xrange(len(labels)):
+  for i in range(len(labels)):
     basename = 'ILSVRC2012_val_000%.5d.JPEG' % (i + 1)
     original_filename = os.path.join(data_dir, basename)
     if not os.path.exists(original_filename):

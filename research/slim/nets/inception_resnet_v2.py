@@ -20,9 +20,9 @@ As described in http://arxiv.org/abs/1602.07261.
     on Learning
   Christian Szegedy, Sergey Ioffe, Vincent Vanhoucke, Alex Alemi
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 
 import tensorflow as tf

@@ -100,7 +100,7 @@ def _get_vars_and_update_ops(hparams, scope):
     A tuple consisting of trainable variables and update ops.
   """
   is_trainable = lambda x: x in tf.trainable_variables()
-  var_list = filter(is_trainable, slim.get_model_variables(scope))
+  var_list = list(filter(is_trainable, slim.get_model_variables(scope)))
   global_step = slim.get_or_create_global_step()
 
   update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS, scope)

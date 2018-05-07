@@ -14,9 +14,9 @@
 
 """Defines the various loss functions in use by the PIXELDA model."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 # Dependency imports
 

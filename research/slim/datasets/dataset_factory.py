@@ -14,9 +14,9 @@
 # ==============================================================================
 """A factory-pattern class which returns classification image/label pairs."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 from datasets import cifar10
 from datasets import flowers

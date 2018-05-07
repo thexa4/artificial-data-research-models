@@ -95,9 +95,9 @@ TODO(sguada):
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import collections
 
@@ -230,8 +230,7 @@ def _gather_clone_loss(clone, num_clones, regularization_losses):
       sum_loss = tf.add_n(all_losses)
   # Add the summaries out of the clone device block.
   if clone_loss is not None:
-    tf.summary.scalar('/'.join(filter(None,
-                                      ['Losses', clone.scope, 'clone_loss'])),
+    tf.summary.scalar('/'.join([_f for _f in ['Losses', clone.scope, 'clone_loss'] if _f]),
                       clone_loss)
   if regularization_loss is not None:
     tf.summary.scalar('Losses/regularization_loss', regularization_loss)

@@ -17,6 +17,7 @@ import contextlib
 import functools
 
 import tensorflow as tf
+import collections
 
 slim = tf.contrib.slim
 
@@ -255,7 +256,7 @@ def expanded_conv(input_tensor,
         net = _fixed_padding(net, kernel_size, rate)
       net = depthwise_func(net, activation_fn=None)
 
-    if callable(expansion_size):
+    if isinstance(expansion_size, collections.Callable):
       inner_size = expansion_size(num_inputs=prev_depth)
     else:
       inner_size = expansion_size
@@ -299,7 +300,7 @@ def expanded_conv(input_tensor,
         net = _fixed_padding(net, kernel_size, rate)
       net = depthwise_func(net, activation_fn=None)
 
-    if callable(residual):  # custom residual
+    if isinstance(residual, collections.Callable):  # custom residual
       net = residual(input_tensor=input_tensor, output_tensor=net)
     elif (residual and
           # stride check enforces that we don't add residuals when spatial

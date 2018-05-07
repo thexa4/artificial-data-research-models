@@ -14,9 +14,9 @@
 # ==============================================================================
 """Tests for tensorflow.contrib.slim.nets.cyclegan."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import tensorflow as tf
 
@@ -76,7 +76,7 @@ class CycleganTest(tf.test.TestCase):
     self._input_and_output_same_shape_helper(6)
 
   def _error_if_height_not_multiple_of_four_helper(self, height):
-    self.assertRaisesRegexp(
+    self.assertRaisesRegex(
         ValueError,
         'The input height must be a multiple of 4.',
         cyclegan.cyclegan_generator_resnet,
@@ -92,7 +92,7 @@ class CycleganTest(tf.test.TestCase):
     self._error_if_height_not_multiple_of_four_helper(31)
 
   def _error_if_width_not_multiple_of_four_helper(self, width):
-    self.assertRaisesRegexp(
+    self.assertRaisesRegex(
         ValueError,
         'The input width must be a multiple of 4.',
         cyclegan.cyclegan_generator_resnet,

@@ -17,9 +17,9 @@
 Paper: https://arxiv.org/abs/1712.00559
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import copy
 import tensorflow as tf

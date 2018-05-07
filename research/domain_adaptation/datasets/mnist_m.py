@@ -18,9 +18,9 @@ The dataset scripts used to create the dataset can be found at:
 tensorflow_models/domain_adaptation_/datasets/download_and_convert_mnist_m_dataset.py
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import os
 # Dependency imports

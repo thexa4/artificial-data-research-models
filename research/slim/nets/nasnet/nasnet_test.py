@@ -13,9 +13,9 @@
 # limitations under the License.
 # ==============================================================================
 """Tests for slim.nasnet."""
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import tensorflow as tf
 
@@ -150,7 +150,7 @@ class NASNetTest(tf.test.TestCase):
                         'AuxLogits': [batch_size, num_classes],
                         'Logits': [batch_size, num_classes],
                         'Predictions': [batch_size, num_classes]}
-    self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
+    self.assertItemsEqual(list(endpoints_shapes.keys()), list(end_points.keys()))
     for endpoint_name in endpoints_shapes:
       tf.logging.info('Endpoint name: {}'.format(endpoint_name))
       expected_shape = endpoints_shapes[endpoint_name]
@@ -201,7 +201,7 @@ class NASNetTest(tf.test.TestCase):
                         'AuxLogits': [batch_size, num_classes],
                         'Logits': [batch_size, num_classes],
                         'Predictions': [batch_size, num_classes]}
-    self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
+    self.assertItemsEqual(list(endpoints_shapes.keys()), list(end_points.keys()))
     for endpoint_name in endpoints_shapes:
       tf.logging.info('Endpoint name: {}'.format(endpoint_name))
       expected_shape = endpoints_shapes[endpoint_name]
@@ -258,7 +258,7 @@ class NASNetTest(tf.test.TestCase):
                         'AuxLogits': [batch_size, num_classes],
                         'Logits': [batch_size, num_classes],
                         'Predictions': [batch_size, num_classes]}
-    self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
+    self.assertItemsEqual(list(endpoints_shapes.keys()), list(end_points.keys()))
     for endpoint_name in endpoints_shapes:
       tf.logging.info('Endpoint name: {}'.format(endpoint_name))
       expected_shape = endpoints_shapes[endpoint_name]
@@ -312,7 +312,7 @@ class NASNetTest(tf.test.TestCase):
       images = tf.random_uniform((batch_size, height, width, 3))
       sess.run(tf.global_variables_initializer())
       output = sess.run(logits, {inputs: images.eval()})
-      self.assertEquals(output.shape, (batch_size, num_classes))
+      self.assertEqual(output.shape, (batch_size, num_classes))
 
   def testEvaluationMobileModel(self):
     batch_size = 2
@@ -327,7 +327,7 @@ class NASNetTest(tf.test.TestCase):
       predictions = tf.argmax(logits, 1)
       sess.run(tf.global_variables_initializer())
       output = sess.run(predictions)
-      self.assertEquals(output.shape, (batch_size,))
+      self.assertEqual(output.shape, (batch_size,))
 
   def testOverrideHParamsCifarModel(self):
     batch_size = 5

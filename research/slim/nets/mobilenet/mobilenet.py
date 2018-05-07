@@ -14,9 +14,9 @@
 # ==============================================================================
 """Mobilenet Base Class."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 import collections
 import contextlib
 import copy
@@ -137,7 +137,7 @@ def safe_arg_scope(funcs, **kwargs):
   Note: can be useful if None value should be interpreted as "do not overwrite
     this parameter value".
   """
-  filtered_args = {name: value for name, value in kwargs.items()
+  filtered_args = {name: value for name, value in list(kwargs.items())
                    if value is not None}
   if filtered_args:
     return slim.arg_scope(funcs, **filtered_args)

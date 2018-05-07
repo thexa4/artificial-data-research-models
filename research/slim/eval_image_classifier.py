@@ -14,9 +14,9 @@
 # ==============================================================================
 """Generic evaluation script that evaluates a model using a given dataset."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import math
 import tensorflow as tf
@@ -158,7 +158,7 @@ def main(_):
     })
 
     # Print the summaries to screen.
-    for name, value in names_to_values.items():
+    for name, value in list(names_to_values.items()):
       summary_name = 'eval/%s' % name
       op = tf.summary.scalar(summary_name, value, collections=[])
       op = tf.Print(op, [value], summary_name)

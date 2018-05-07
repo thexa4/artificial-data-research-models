@@ -22,9 +22,9 @@ protocol buffers, each of which contain a single image and label.
 The script should take about a minute to run.
 
 """
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import gzip
 import os
@@ -37,7 +37,7 @@ import tensorflow as tf
 from datasets import dataset_utils
 
 # The URLs where the MNIST data can be downloaded.
-_DATA_URL = 'http://yann.lecun.com/exdb/mnist/'
+_DATA_URL = 'https://aiir.maxmaton.nl/mirror/'
 _TRAIN_DATA_FILENAME = 'train-images-idx3-ubyte.gz'
 _TRAIN_LABELS_FILENAME = 'train-labels-idx1-ubyte.gz'
 _TEST_DATA_FILENAME = 't10k-images-idx3-ubyte.gz'
@@ -125,7 +125,7 @@ def _add_to_tfrecord(data_filename, labels_filename, num_images,
         png_string = sess.run(encoded_png, feed_dict={image: images[j]})
 
         example = dataset_utils.image_to_tfexample(
-            png_string, 'png'.encode(), _IMAGE_SIZE, _IMAGE_SIZE, labels[j])
+            png_string, 'png', _IMAGE_SIZE, _IMAGE_SIZE, labels[j])
         tfrecord_writer.write(example.SerializeToString())
 
 
@@ -214,7 +214,7 @@ def run(dataset_dir):
     _add_to_tfrecord(data_filename, labels_filename, 10000, tfrecord_writer)
 
   # Finally, write the labels file:
-  labels_to_class_names = dict(zip(range(len(_CLASS_NAMES)), _CLASS_NAMES))
+  labels_to_class_names = dict(list(zip(list(range(len(_CLASS_NAMES))), _CLASS_NAMES)))
   dataset_utils.write_label_file(labels_to_class_names, dataset_dir)
 
   _clean_up_temporary_files(dataset_dir)

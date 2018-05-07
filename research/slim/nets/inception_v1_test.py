@@ -14,9 +14,9 @@
 # ==============================================================================
 """Tests for nets.inception_v1."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 import numpy as np
 import tensorflow as tf
@@ -69,7 +69,7 @@ class InceptionV1Test(tf.test.TestCase):
                           'Mixed_3c', 'MaxPool_4a_3x3', 'Mixed_4b', 'Mixed_4c',
                           'Mixed_4d', 'Mixed_4e', 'Mixed_4f', 'MaxPool_5a_2x2',
                           'Mixed_5b', 'Mixed_5c']
-    self.assertItemsEqual(end_points.keys(), expected_endpoints)
+    self.assertItemsEqual(list(end_points.keys()), expected_endpoints)
 
   def testBuildOnlyUptoFinalEndpoint(self):
     batch_size = 5
@@ -86,7 +86,7 @@ class InceptionV1Test(tf.test.TestCase):
             inputs, final_endpoint=endpoint)
         self.assertTrue(out_tensor.op.name.startswith(
             'InceptionV1/' + endpoint))
-        self.assertItemsEqual(endpoints[:index+1], end_points.keys())
+        self.assertItemsEqual(endpoints[:index+1], list(end_points.keys()))
 
   def testBuildAndCheckAllEndPointsUptoMixed5c(self):
     batch_size = 5
@@ -112,7 +112,7 @@ class InceptionV1Test(tf.test.TestCase):
                         'Mixed_5b': [5, 7, 7, 832],
                         'Mixed_5c': [5, 7, 7, 1024]}
 
-    self.assertItemsEqual(endpoints_shapes.keys(), end_points.keys())
+    self.assertItemsEqual(list(endpoints_shapes.keys()), list(end_points.keys()))
     for endpoint_name in endpoints_shapes:
       expected_shape = endpoints_shapes[endpoint_name]
       self.assertTrue(endpoint_name in end_points)
@@ -191,7 +191,7 @@ class InceptionV1Test(tf.test.TestCase):
     with self.test_session() as sess:
       sess.run(tf.global_variables_initializer())
       output = sess.run(logits, {inputs: images.eval()})
-      self.assertEquals(output.shape, (batch_size, num_classes))
+      self.assertEqual(output.shape, (batch_size, num_classes))
 
   def testEvaluation(self):
     batch_size = 2
@@ -206,7 +206,7 @@ class InceptionV1Test(tf.test.TestCase):
     with self.test_session() as sess:
       sess.run(tf.global_variables_initializer())
       output = sess.run(predictions)
-      self.assertEquals(output.shape, (batch_size,))
+      self.assertEqual(output.shape, (batch_size,))
 
   def testTrainEvalWithReuse(self):
     train_batch_size = 5
@@ -223,7 +223,7 @@ class InceptionV1Test(tf.test.TestCase):
     with self.test_session() as sess:
       sess.run(tf.global_variables_initializer())
       output = sess.run(predictions)
-      self.assertEquals(output.shape, (eval_batch_size,))
+      self.assertEqual(output.shape, (eval_batch_size,))
 
   def testLogitsNotSqueezed(self):
     num_classes = 25

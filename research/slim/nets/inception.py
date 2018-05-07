@@ -14,9 +14,9 @@
 # ==============================================================================
 """Brings all inception models under one namespace."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 # pylint: disable=unused-import
 from nets.inception_resnet_v2 import inception_resnet_v2

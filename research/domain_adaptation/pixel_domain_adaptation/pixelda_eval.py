@@ -165,7 +165,7 @@ def run_eval(run_dir, checkpoint_dir, hparams):
             name='Source Reconstruction')
       pixelda_utils.summarize_images(target_images, 'Target')
 
-      for name, value in names_to_values.iteritems():
+      for name, value in names_to_values.items():
         tf.summary.scalar(name, value)
 
       # Use the entire split by default
@@ -179,7 +179,7 @@ def run_eval(run_dir, checkpoint_dir, hparams):
           checkpoint_path=checkpoint_path,
           logdir=run_dir,
           num_evals=num_batches,
-          eval_op=names_to_updates.values(),
+          eval_op=list(names_to_updates.values()),
           final_op=names_to_values)
 
 
@@ -255,7 +255,7 @@ def create_metrics(end_points, source_labels, target_labels, hparams):
   ##########################################################################
   # Pose data-specific losses.
   ##########################################################################
-  if 'quaternion' in source_labels.keys():
+  if 'quaternion' in list(source_labels.keys()):
     params = {}
     params['use_logging'] = False
     params['batch_size'] = batch_size

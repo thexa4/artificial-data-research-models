@@ -101,9 +101,9 @@ Total:                                                 1,800,144     106,002,432
 """
 
 # Tensorflow mandates these.
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
+
+
 
 from collections import namedtuple
 import functools
