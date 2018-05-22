@@ -158,26 +158,20 @@ def run_eval(run_dir, checkpoint_dir, hparams):
           count = count + 1
           fullfile = run_dir + "/converted." + str(curstep) + "." + str(count) + "." + str(label) + ".conv.png"
           fullfile_source = run_dir + "/converted." + str(curstep) + "." + str(count) + "." + str(label) + ".orig.png"
-          print(fullfile)
+          if count % 1000 == 0:
+            print(count)
           with open(fullfile, 'wb') as f:
             f.write(tensor)
           with open(fullfile_source, 'wb') as f:
             f.write(source)
           return 42.
 
-        encoded_source = tf.image.encode_png(tf.cast(tf.multiply(tensor[1], 256), tf.uint8))
-        encoded = tf.image.encode_png(tf.cast(tf.multiply(tensor[0], 256), tf.uint8))
-        #print(tensor[2])
-        #crash
+        encoded_source = tf.image.encode_png(tf.cast(tf.multiply(tensor[1], 255.), tf.uint8))
+        encoded = tf.image.encode_png(tf.cast(tf.multiply(tensor[0], 255.), tf.uint8))
         return tf.py_func(save_recursive, [encoded, curstep, encoded_source, tensor[2]], tf.double)
 
 
-      #encoded = tf.image.encode_png(tf.cast(end_points['transferred_images'], tf.uint8))
       curstep = slim.get_or_create_global_step()
-      #indexes = tf.range(tf.shape(end_points['transferred_images'])[0])
-      #filenames = tf.string_join([run_dir, '/', tf.as_string(curstep), '_'])
-      #encoded_source = tf.image.encode_png(tf.cast(tf.multiply(source_images, 256), tf.uint8))
-      #encoded = tf.image.encode_png(tf.cast(tf.multiply(end_points['transferred_images'], 256), tf.uint8))
       save = tf.map_fn(save_image, [end_points['transferred_images'], source_images, source_labels['class']], dtype=tf.double)
       
 
