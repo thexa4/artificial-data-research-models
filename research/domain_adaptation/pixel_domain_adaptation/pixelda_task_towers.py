@@ -80,6 +80,8 @@ def add_task_specific_model(images,
             images, num_private_layers=hparams.num_private_layers, **kwargs)
       elif model == 'mnist':
         logits, _ = mnist_classifier(images, **kwargs)
+      elif model == 'mnist_artificial':
+        logits, _ = mnist_classifier(images, **kwargs)
       elif model == 'svhn':
         logits, _ = svhn_classifier(images, **kwargs)
       elif model == 'gtsrb':

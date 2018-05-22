@@ -23,6 +23,7 @@ import tensorflow as tf
 
 from slim.datasets import mnist
 from domain_adaptation.datasets import mnist_m
+from domain_adaptation.datasets import mnist_artificial
 
 slim = tf.contrib.slim
 
@@ -48,7 +49,7 @@ def get_dataset(dataset_name,
   Raises:
     ValueError: if `dataset_name` isn't recognized.
   """
-  dataset_name_to_module = {'mnist': mnist, 'mnist_m': mnist_m}
+  dataset_name_to_module = {'mnist': mnist, 'mnist_m': mnist_m, 'mnist_artificial': mnist_artificial}
   if dataset_name not in dataset_name_to_module:
     raise ValueError('Name of dataset unknown %s.' % dataset_name)
 
@@ -101,7 +102,7 @@ def provide_batch(dataset_name, split_name, dataset_dir, num_readers,
                                             dataset.num_classes)
 
   # Convert mnist to RGB and 32x32 so that it can match mnist_m.
-  if dataset_name == 'mnist':
-    images = tf.image.grayscale_to_rgb(images)
-    images = tf.image.resize_images(images, [32, 32])
+  #if dataset_name == 'mnist':
+  #  images = tf.image.grayscale_to_rgb(images)
+  #  images = tf.image.resize_images(images, [32, 32])
   return images, labels
