@@ -156,8 +156,8 @@ def run_eval(run_dir, checkpoint_dir, hparams):
         def save_recursive(tensor, curstep, source, label = "unknown"):
           global count
           count = count + 1
-          fullfile = run_dir + "/converted." + str(curstep) + "." + str(count) + "." + str(label) + ".conv.png"
-          fullfile_source = run_dir + "/converted." + str(curstep) + "." + str(count) + "." + str(label) + ".orig.png"
+          fullfile = run_dir + "/converted.conv." + str(curstep) + "." + str(count) + "." + str(label) + ".png"
+          fullfile_source = run_dir + "/converted.orig." + str(curstep) + "." + str(count) + "." + str(label) + ".png"
           if count % 1000 == 0:
             print(count)
           with open(fullfile, 'wb') as f:
