@@ -47,10 +47,10 @@ class dataset:
 			yield (image, label)
 
 	def train(datadir):
-		return tf.data.Dataset.from_generator(functools.partial(dataset.folder_generator, datadir + "/train"), output_types=(tf.float32, tf.int32), output_shapes=((784,), ()))
+		return tf.data.Dataset.from_generator(functools.partial(dataset.folder_generator, datadir + "/train"), output_types=(tf.float32, tf.int32), output_shapes=((784,), ())).cache(datadir + "/train.cache")
 
 	def test(datadir):
-		return tf.data.Dataset.from_generator(functools.partial(dataset.folder_generator, datadir + "/test"), output_types=(tf.float32, tf.int32), output_shapes=((784,), ()))
+		return tf.data.Dataset.from_generator(functools.partial(dataset.folder_generator, datadir + "/test"), output_types=(tf.float32, tf.int32), output_shapes=((784,), ())).cache(datadir + "/test.cache")
 		
 
 
