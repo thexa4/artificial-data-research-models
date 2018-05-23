@@ -34,6 +34,7 @@ $ bash learning/brain/tensorboard/tensorboard.sh \
 """
 from functools import partial
 import math
+import os
 
 # Dependency imports
 
@@ -153,13 +154,16 @@ def run_eval(run_dir, checkpoint_dir, hparams):
       def save_image(tensor):
         global count
         count = 1
+        
+        if not os.path.exists(run_dir + "/results/converted"):
+          os.makedirs(run_dir + "/results/converted")
+        if not os.path.exists(run_dir + "/results/original"):
+          os.makedirs(run_dir + "/results/original")
         def save_recursive(tensor, curstep, source, label = "unknown"):
           global count
           count = count + 1
-          fullfile = run_dir + "/converted.conv." + str(curstep) + "." + str(count) + "." + str(label) + ".png"
-          fullfile_source = run_dir + "/converted.orig." + str(curstep) + "." + str(count) + "." + str(label) + ".png"
-          if count % 1000 == 0:
-            print(count)
+          fullfile = run_dir + "/results/converted/" + str(curstep) + "." + str(count) + "." + str(label) + ".png"
+          fullfile_source = run_dir + "/results/original/" + str(curstep) + "." + str(count) + "." + str(label) + ".png"
           with open(fullfile, 'wb') as f:
             f.write(tensor)
           with open(fullfile_source, 'wb') as f:
