@@ -82,6 +82,8 @@ def add_task_specific_model(images,
         logits, _ = mnist_classifier(images, **kwargs)
       elif model == 'mnist_artificial':
         logits, _ = mnist_classifier(images, **kwargs)
+      elif model == 'mnist_custom':
+        logits, _ = mnist_classifier(images, **kwargs)
       elif model == 'svhn':
         logits, _ = svhn_classifier(images, **kwargs)
       elif model == 'gtsrb':
