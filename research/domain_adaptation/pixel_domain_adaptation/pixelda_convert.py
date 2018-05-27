@@ -201,7 +201,8 @@ def run_eval(run_dir, checkpoint_dir, hparams):
         tf.summary.scalar(name, value)
 
       # Use the entire split by default
-      num_examples = target_dataset.num_samples
+      num_examples = source_dataset.num_samples
+      print("Convert.numexamples = " + str(num_examples))
 
       num_batches = math.ceil(num_examples / float(hparams.batch_size))
       global_step = slim.get_or_create_global_step()
