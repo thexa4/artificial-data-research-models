@@ -50,7 +50,7 @@ class dataset:
 		return tf.data.Dataset.from_generator(functools.partial(dataset.folder_generator, datadir + "/train"), output_types=(tf.float32, tf.int32), output_shapes=((784,), ())).cache(datadir + "/train.cache")
 
 	def test(datadir):
-		return tf.data.Dataset.from_generator(functools.partial(dataset.folder_generator, datadir + "/test"), output_types=(tf.float32, tf.int32), output_shapes=((784,), ())).cache(datadir + "/test.cache")
+		return tf.data.Dataset.from_generator(functools.partial(dataset.folder_generator, datadir + "/test"), output_types=(tf.float32, tf.int32), output_shapes=((784,), ()))
 		
 
 
@@ -248,7 +248,8 @@ def run_mnist(flags_obj):
 
     # Iterate through the dataset a set number (`epochs_between_evals`) of times
     # during each training session.
-    ds = ds.repeat(flags_obj.epochs_between_evals)
+    ds = ds.repeat()
+    ds = ds.take(1000000)
     return ds
 
   def eval_input_fn():
@@ -268,6 +269,9 @@ def run_mnist(flags_obj):
     if model_helpers.past_stop_threshold(flags_obj.stop_threshold,
                                          eval_results['accuracy']):
       break
+
+  eval_results = mnist_classifier.evaluate(input_fn=eval_input_fn)
+  print('\nEvaluation results:\n\t%s\n' % eval_results)
 
   # Export the model
   if flags_obj.export_dir is not None:
