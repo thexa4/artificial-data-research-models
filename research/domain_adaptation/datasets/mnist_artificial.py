@@ -83,17 +83,28 @@ def get_split(split_name, dataset_dir, file_pattern=None, reader=None):
       keys_to_features, items_to_handlers)
 
   samples = _SPLITS_TO_SIZES[split_name]
-  folder_pattern = os.path.join(dataset_dir, "mnist_artificial_%s_folder" % split_name)
+  folder_name = split_name
+  if folder_name == "valid":
+    folder_name = "train"
+  folder_pattern = os.path.join(dataset_dir, "mnist_artificial_%s_folder" % folder_name)
+  folder_samples = len(os.listdir(folder_pattern)) * 0.9
   if split_name == "train":
-    samples = len(os.listdir(folder_pattern)) - 1000
+    samples = int(folder_samples * 0.9)
+  if split_name == "valid":
+    samples = folder_samples - int(folder_samples * 0.9)
   if split_name == "test":
-    samples = len(os.listdir(folder_pattern))
+    samples = folder_samples
 
   labels_to_names = None
   if dataset_utils.has_labels(dataset_dir):
     labels_to_names = dataset_utils.read_label_file(dataset_dir)
 
   print("Samples: " + str(samples))
+  print(os.path.join(dataset_dir, "mnist_artificial_%s.count" % split_name))
+
+  with open(os.path.join(dataset_dir, "mnist_artificial_%s.count" % split_name), 'w') as f:
+    f.write(str(samples))
+    
   return slim.dataset.Dataset(
       data_sources=file_pattern,
       reader=reader,

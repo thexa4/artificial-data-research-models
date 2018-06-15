@@ -199,8 +199,9 @@ def run(dataset_dir):
   # Divide into train and validation:
   random.seed(_RANDOM_SEED)
   random.shuffle(train_validation_filenames)
-  train_filenames = train_validation_filenames[_NUM_VALIDATION:]
-  validation_filenames = train_validation_filenames[:_NUM_VALIDATION]
+  num_validation = len(train_validation_filenames) - int(len(train_validation_filenames) * 0.9)
+  train_filenames = train_validation_filenames[num_validation:]
+  validation_filenames = train_validation_filenames[:num_validation]
 
   train_validation_filenames_to_class_ids = _extract_labels(
       os.path.join(dataset_dir, 'mnist_artificial', 'mnist_artificial_train_labels.txt'))
